@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="ms" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pratonton sistem pengurusan dalaman Farmasi Al Qanaah untuk inventori, jualan, pelanggan, staf dan kandungan laman.">
+  <meta name="theme-color" content="#047857">
+  <title>Dashboard Farmasi Al Qanaah</title>
+  <meta property="og:title" content="Dashboard Farmasi Al Qanaah">
+  <meta property="og:description" content="Pratonton sistem pengurusan dalaman Farmasi Al Qanaah untuk inventori, jualan, pelanggan, staf dan kandungan laman.">
+  <meta property="og:type" content="website">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+            gold: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706' },
+            navy: { 800:'#1e3a5f',900:'#0f2744' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: radial-gradient(circle at top, rgba(16, 185, 129, 0.12), transparent 35%), linear-gradient(180deg, #f0fdf9 0%, #ebf9f5 55%, #e8f7f3 100%); color: #0f2733; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    ::selection { background: rgba(16, 185, 129, 0.22); color: #064e3b; }
+    section { scroll-snap-align: start; }
+    section[id] { scroll-margin-top: 6rem; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-bg { background: radial-gradient(circle at 72% 18%, rgba(252, 211, 77, 0.2), transparent 24%), linear-gradient(135deg, #042f2e 0%, #075e54 35%, #0f766e 66%, #0e7490 100%); }
+    .card-hover { transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 28px 55px rgba(15, 118, 110, 0.16); border-color: rgba(16, 185, 129, 0.36); }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 1rem 1.8rem; border-radius: 999px; font-weight: 700; background: linear-gradient(135deg, #f59e0b, #10b981 52%, #06b6d4); color: #ffffff; transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease; box-shadow: 0 16px 34px rgba(6, 95, 70, 0.24); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(16, 185, 129, 0.36); filter: brightness(1.06); }
+    .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 1rem 1.7rem; border-radius: 999px; background: rgba(255,255,255,0.18); color: #f8fafc; border: 1.5px solid rgba(255,255,255,0.35); backdrop-filter: blur(10px); transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.5); }
+    .btn-primary:focus-visible, .btn-secondary:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid rgba(251, 191, 36, 0.75); outline-offset: 4px; }
+    .hero-badge { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; border-radius: 999px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: rgba(255,255,255,0.95); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+    .hero-note { color: rgba(255,255,255,0.88); }
+    .stat-card { background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(236, 253, 245, 0.84)); backdrop-filter: blur(16px); border: 1.5px solid rgba(16, 185, 129, 0.22); transition: transform 0.3s ease, background 0.3s ease; box-shadow: 0 16px 38px rgba(4, 120, 87, 0.12); }
+    .stat-card:hover { transform: translateY(-6px); background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(16, 185, 129, 0.15)); }
+    .nav-glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(22px); border-bottom: 1px solid rgba(16, 185, 129, 0.18); box-shadow: 0 18px 50px rgba(15, 47, 72, 0.09); transition: background 0.25s ease, box-shadow 0.25s ease; }
+    .nav-glass.nav-scrolled { background: rgba(255, 255, 255, 0.98); box-shadow: 0 20px 55px rgba(15, 47, 72, 0.13); }
+    .nav-active { color: #065f46; font-weight: 800; position: relative; }
+    .nav-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.45rem; height: 0.18rem; border-radius: 999px; background: linear-gradient(90deg, #10b981, #06b6d4); }
+    .mobile-panel .nav-active { background: #ecfdf5; }
+    .mobile-panel .nav-active::after { display: none; }
+    .glassmorphism { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); border: 1.5px solid rgba(16, 185, 129, 0.2); box-shadow: 0 24px 70px rgba(16, 185, 129, 0.12); }
+    .section-divider { height: 2px; background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.25), transparent); }
+    .section-title { position: relative; }
+    .section-title::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -1.25rem; width: 5rem; height: 0.4rem; border-radius: 999px; background: linear-gradient(90deg, #10b981, #06b6d4); }
+    .hero-graphic { background: radial-gradient(circle at top, rgba(16, 185, 129, 0.2), transparent 55%), radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15), transparent 30%); }
+    .mobile-panel { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.25s ease; opacity: 0; }
+    .mobile-panel.open { max-height: 28rem; opacity: 1; }
+    #branches .card-hover { cursor: pointer; }
+    #branches details { height: 100%; }
+    #branches summary { list-style: none; }
+    #branches summary::-webkit-details-marker { display: none; }
+    .progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #f59e0b, #10b981, #06b6d4); z-index: 60; box-shadow: 0 0 20px rgba(16, 185, 129, 0.55); }
+    .back-to-top { position: fixed; right: 1rem; bottom: 1rem; z-index: 45; transform: translateY(1rem); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; }
+    .back-to-top.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    body:not(.admin-authenticated) .admin-protected { display: none !important; }
+    body.admin-authenticated #admin-login-screen { display: none !important; }
+    .pulse-ring { position: absolute; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); animation: pulse-ring 2.8s ease-out infinite; }
+    .holographic-capsule { border-radius: 999px; background: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(16,185,129,0.16)); border: 1px solid rgba(255,255,255,0.32); box-shadow: inset 0 1px 28px rgba(255,255,255,0.22), 0 28px 80px rgba(6,182,212,0.24); backdrop-filter: blur(20px); }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-glow { animation: glow 3s ease-in-out infinite alternate; }
+    .animate-fade-up { animation: fade-up 0.8s ease both; }
+    .animate-delay-1 { animation-delay: 0.12s; }
+    .animate-delay-2 { animation-delay: 0.24s; }
+    .animate-delay-3 { animation-delay: 0.36s; }
+    .animate-delay-4 { animation-delay: 0.48s; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @keyframes glow { from { box-shadow: inset 0 1px 28px rgba(255,255,255,0.22), 0 22px 70px rgba(6,182,212,0.22); } to { box-shadow: inset 0 1px 36px rgba(255,255,255,0.32), 0 30px 90px rgba(16,185,129,0.32); } }
+    @keyframes pulse-ring { 0% { opacity: 0.65; transform: scale(0.82); } 100% { opacity: 0; transform: scale(1.45); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full text-gray-800 overflow-auto">
+  <div id="scroll-progress" class="progress-bar"></div>
+  <main id="admin-login-screen" class="min-h-screen bg-slate-950 text-white">
+   <div class="mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-4 py-12 lg:grid-cols-[1fr_440px] sm:px-6 lg:px-8">
+    <div>
+     <div class="mb-7 inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-emerald-200">
+      <i data-lucide="shield-check" class="h-4 w-4"></i> Admin Access
+     </div>
+     <h1 class="font-display text-4xl font-bold leading-tight text-white lg:text-6xl">Dashboard Admin Al Qanaah</h1>
+     <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-300">Masukkan username dan password untuk mengurus kandungan website, cawangan, produk, membership dan maklumat hubungi.</p>
+     <a href="../index.html" class="mt-8 inline-flex items-center gap-2 rounded-full border border-slate-700 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:bg-slate-900"><i data-lucide="arrow-left" class="h-4 w-4"></i>Kembali ke Website</a>
+    </div>
+    <section class="rounded-[2rem] border border-slate-800 bg-white p-7 text-slate-900 shadow-2xl">
+     <div class="mb-6 flex items-center gap-3">
+      <div class="h-12 w-28 overflow-hidden rounded-xl bg-black p-1 ring-1 ring-emerald-100">
+       <img src="../gambar/logo farmasi al qanaah ( petak ).jpeg" alt="Logo Farmasi Al Qanaah" class="h-full w-full object-contain" loading="eager">
+      </div>
+      <div>
+       <h2 class="text-xl font-bold text-emerald-900">Log Masuk</h2>
+       <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-600">Admin Panel</p>
+      </div>
+     </div>
+     <form id="admin-login-form" class="space-y-4">
+      <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-700">Username</span><input id="admin-login-username" type="text" autocomplete="username" class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-500" placeholder="Masukkan username"></label>
+      <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-700">Password</span><input id="admin-login-password" type="password" autocomplete="current-password" class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-emerald-500" placeholder="Masukkan password"></label>
+      <p id="admin-login-error" class="hidden rounded-2xl bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-700">Password tidak sah.</p>
+      <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-500"><i data-lucide="log-in" class="h-4 w-4"></i>Masuk Dashboard</button>
+     </form>
+    </section>
+   </div>
+  </main>
+  <!-- Navigation -->
+  <nav class="admin-protected nav-glass fixed top-0 left-0 right-0 z-50 border-b border-emerald-100">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+     <a href="../index.html" class="flex items-center gap-3 rounded-full pr-3 transition hover:bg-emerald-50">
+      <div class="h-12 w-28 overflow-hidden rounded-xl bg-black p-1 shadow-lg shadow-emerald-900/15 ring-1 ring-emerald-100">
+       <img src="../gambar/logo farmasi al qanaah ( petak ).jpeg" alt="Logo Farmasi Al Qanaah" class="h-full w-full object-contain" loading="eager">
+      </div>
+      <div>
+       <h1 class="text-emerald-900 font-bold text-lg leading-tight">Farmasi Al Qanaah</h1>
+       <p class="text-[10px] text-emerald-600 tracking-wider uppercase">Professional Healthcare</p>
+      </div>
+     </a>
+     <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-700">
+      <a href="../tentang.html" class="hover:text-emerald-700 transition">Profil Kami</a> <a href="../perkhidmatan.html" class="hover:text-emerald-700 transition">Perkhidmatan</a> <a href="../produk.html" class="hover:text-emerald-700 transition">Produk</a> <a href="../keahlian.html" class="hover:text-emerald-700 transition">Keahlian</a> <a href="../cawangan.html" class="hover:text-emerald-700 transition">Cawangan</a>
+     </div>
+     <a href="../cawangan.html" class="hidden lg:inline-flex items-center gap-2 rounded-full bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-900/15 transition hover:bg-emerald-700"><i data-lucide="map-pin" class="w-4 h-4"></i> Cari Cawangan</a>
+     <button id="mobile-menu-btn" class="lg:hidden rounded-full p-2 text-emerald-800 hover:bg-emerald-50" aria-label="Buka menu" aria-expanded="false"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    </div>
+    <div id="mobile-menu" class="mobile-panel lg:hidden border-t border-emerald-100">
+     <div class="grid gap-2 py-4 text-sm font-semibold text-slate-700">
+      <a href="../tentang.html" class="rounded-xl px-4 py-3 hover:bg-emerald-50 hover:text-emerald-800">Profil Kami</a>
+      <a href="../perkhidmatan.html" class="rounded-xl px-4 py-3 hover:bg-emerald-50 hover:text-emerald-800">Perkhidmatan</a>
+      <a href="../produk.html" class="rounded-xl px-4 py-3 hover:bg-emerald-50 hover:text-emerald-800">Produk</a>
+      <a href="../keahlian.html" class="rounded-xl px-4 py-3 hover:bg-emerald-50 hover:text-emerald-800">Keahlian</a>
+      <a href="../cawangan.html" class="rounded-xl px-4 py-3 hover:bg-emerald-50 hover:text-emerald-800">Cawangan</a>
+     </div>
+    </div>
+   </div>
+  </nav><!-- Admin Dashboard Preview -->
+  <section id="dashboard" class="admin-protected py-20 lg:py-28 bg-slate-950 text-slate-100">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-10 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+     <div>
+      <p class="text-emerald-400 font-bold text-xs tracking-[0.35em] uppercase mb-3">Sistem Pengurusan</p>
+      <h3 class="font-display text-3xl lg:text-5xl font-bold text-white">Dashboard Pengurusan Kandungan</h3>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300">Pusat kawalan untuk menyelaras kandungan laman Al Qanaah: cawangan, produk, membership, event dan maklumat hubungi.</p>
+     </div>
+     <div class="flex flex-wrap gap-3">
+      <button id="dashboard-save" type="button" class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-400"><i data-lucide="save" class="h-4 w-4"></i>Simpan Draf</button>
+      <button id="dashboard-reset" type="button" class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-700 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:bg-slate-900"><i data-lucide="rotate-ccw" class="h-4 w-4"></i>Reset</button>
+      <button id="admin-logout" type="button" class="inline-flex items-center justify-center gap-2 rounded-full border border-rose-400/40 px-5 py-3 text-sm font-semibold text-rose-100 transition hover:bg-rose-500/10"><i data-lucide="log-out" class="h-4 w-4"></i>Logout</button>
+     </div>
+    </div>
+
+    <div class="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+     <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+      <div class="mb-3 flex items-center justify-between"><span class="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-300">Cawangan</span><i data-lucide="map-pin" class="h-5 w-5 text-emerald-300"></i></div>
+      <p id="outlet-total-count" class="text-3xl font-bold text-white">8</p>
+      <p class="mt-1 text-xs text-slate-400">Kad outlet aktif</p>
+     </div>
+     <div class="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-5">
+      <div class="mb-3 flex items-center justify-between"><span class="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-300">Produk</span><i data-lucide="shopping-bag" class="h-5 w-5 text-cyan-300"></i></div>
+      <p class="text-3xl font-bold text-white">4</p>
+      <p class="mt-1 text-xs text-slate-400">Kategori utama</p>
+     </div>
+     <div class="rounded-2xl border border-gold-500/20 bg-gold-500/10 p-5">
+      <div class="mb-3 flex items-center justify-between"><span class="text-xs font-semibold uppercase tracking-[0.25em] text-gold-300">Membership</span><i data-lucide="badge-percent" class="h-5 w-5 text-gold-300"></i></div>
+      <p class="text-3xl font-bold text-white">4</p>
+      <p class="mt-1 text-xs text-slate-400">Benefit ahli</p>
+     </div>
+     <div class="rounded-2xl border border-violet-500/20 bg-violet-500/10 p-5">
+      <div class="mb-3 flex items-center justify-between"><span class="text-xs font-semibold uppercase tracking-[0.25em] text-violet-300">Event</span><i data-lucide="video" class="h-5 w-5 text-violet-300"></i></div>
+      <p class="text-3xl font-bold text-white">2</p>
+      <p class="mt-1 text-xs text-slate-400">Video komuniti</p>
+     </div>
+    </div>
+
+    <div class="grid gap-6 xl:grid-cols-[280px_1fr]">
+     <aside class="space-y-4">
+      <a href="#panel-cawangan" class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/40 hover:bg-slate-900/70"><i data-lucide="store" class="h-4 w-4 text-emerald-300"></i>Cawangan</a>
+      <a href="#panel-produk" class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/40 hover:bg-slate-900/70"><i data-lucide="package" class="h-4 w-4 text-cyan-300"></i>Produk &amp; Promosi</a>
+      <a href="#panel-membership" class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/40 hover:bg-slate-900/70"><i data-lucide="badge-percent" class="h-4 w-4 text-gold-300"></i>Membership</a>
+      <a href="#panel-event" class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/40 hover:bg-slate-900/70"><i data-lucide="clapperboard" class="h-4 w-4 text-violet-300"></i>Event &amp; Video</a>
+      <a href="#panel-contact" class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/40 hover:bg-slate-900/70"><i data-lucide="phone-call" class="h-4 w-4 text-emerald-300"></i>Tetapan Hubungi</a>
+      <div id="dashboard-status" class="hidden rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">Draf dashboard telah disimpan.</div>
+     </aside>
+
+     <div class="space-y-6">
+      <section id="panel-cawangan" class="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl">
+       <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+         <h4 class="text-xl font-bold text-white">Pengurusan Cawangan</h4>
+         <p class="text-sm text-slate-400">Kemaskini status, alamat dan paparan outlet.</p>
+        </div>
+        <span id="outlet-count-badge" class="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">8 outlet</span>
+       </div>
+       <div class="mb-6 rounded-2xl border border-slate-800 bg-slate-950 p-4">
+        <div class="mb-4 flex items-center gap-2 text-sm font-semibold text-white"><i data-lucide="plus-circle" class="h-4 w-4 text-emerald-300"></i>Tambah Outlet Baru</div>
+        <div class="grid gap-3 lg:grid-cols-[1.2fr_1fr_0.8fr_0.8fr_auto]">
+         <label class="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500"><span class="mb-2 block">Nama Outlet</span><input id="new-outlet-name" type="text" placeholder="Contoh: Taman Bukit Indah" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm normal-case tracking-normal text-slate-100 outline-none focus:border-emerald-400"></label>
+         <label class="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500"><span class="mb-2 block">Lokasi</span><input id="new-outlet-location" type="text" placeholder="Johor Bahru" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm normal-case tracking-normal text-slate-100 outline-none focus:border-emerald-400"></label>
+         <label class="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500"><span class="mb-2 block">Status</span><select id="new-outlet-status" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm normal-case tracking-normal text-slate-100 outline-none focus:border-emerald-400"><option>Aktif</option><option selected>Akan Dibuka</option><option>Tutup</option></select></label>
+         <label class="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500"><span class="mb-2 block">Mula Operasi</span><input id="new-outlet-date" type="text" placeholder="1 Jan 2026" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm normal-case tracking-normal text-slate-100 outline-none focus:border-emerald-400"></label>
+         <button id="add-outlet" type="button" class="inline-flex items-center justify-center gap-2 self-end rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-400"><i data-lucide="plus" class="h-4 w-4"></i>Tambah</button>
+        </div>
+        <p id="outlet-form-error" class="mt-3 hidden text-sm font-semibold text-rose-300">Isi nama outlet dan lokasi dahulu.</p>
+       </div>
+       <div class="overflow-x-auto">
+        <table class="w-full min-w-[860px] text-left text-sm">
+         <thead class="text-xs uppercase tracking-[0.2em] text-slate-500">
+          <tr class="border-b border-slate-800">
+           <th class="py-3 pr-4">Outlet</th>
+           <th class="py-3 pr-4">Lokasi</th>
+           <th class="py-3 pr-4">Status</th>
+           <th class="py-3 pr-4">Mula Operasi</th>
+           <th class="py-3 pr-4">Tindakan</th>
+          </tr>
+         </thead>
+         <tbody id="outlet-table-body" class="divide-y divide-slate-800 text-slate-300">
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Taman Air Biru</td><td class="py-4 pr-4">Pasir Gudang</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusAirBiru" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option selected>Aktif</option><option>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">1 Apr 2022</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Taman Scientex</td><td class="py-4 pr-4">Pasir Gudang</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusScientex" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option selected>Aktif</option><option>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">11 Apr 2023</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Kempas</td><td class="py-4 pr-4">Johor Bahru</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusKempas" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option selected>Aktif</option><option>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">18 Okt 2023</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Pulai Mutiara</td><td class="py-4 pr-4">Johor Bahru</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusPulaiMutiara" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option selected>Aktif</option><option>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">27 Jun 2024</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Taman Suria</td><td class="py-4 pr-4">Johor Bahru</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusTamanSuria" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option selected>Aktif</option><option>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">3 Nov 2024</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Sri Saujana</td><td class="py-4 pr-4">Kota Tinggi</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusSriSaujana" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option>Aktif</option><option selected>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">1 Mac 2025</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Bandar Seri Alam</td><td class="py-4 pr-4">Masai</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusSeriAlam" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option>Aktif</option><option selected>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">24 Okt 2025</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+          <tr data-base-outlet><td class="py-4 pr-4 font-semibold text-white">Sierra Perdana</td><td class="py-4 pr-4">Masai</td><td class="py-4 pr-4"><select data-dashboard-field="outletStatusSierraPerdana" class="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400"><option>Aktif</option><option selected>Akan Dibuka</option><option>Tutup</option></select></td><td class="py-4 pr-4">8 Dis 2025</td><td class="py-4 pr-4 text-slate-600">Tetap</td></tr>
+         </tbody>
+        </table>
+       </div>
+      </section>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+       <section id="panel-produk" class="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl">
+        <h4 class="text-xl font-bold text-white">Produk &amp; Promosi</h4>
+        <div class="mt-5 space-y-4">
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">Kempen Promosi</span><input data-dashboard-field="promoTitle" value="Promosi Kesihatan Mingguan" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"></label>
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">Kategori Fokus</span><select data-dashboard-field="productCategory" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"><option>Vitamin & Suplemen</option><option>Ubat OTC</option><option>Penjagaan Diri</option><option>Preskripsi</option></select></label>
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">Nota Promosi</span><textarea data-dashboard-field="promoNote" rows="4" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400">Tawaran produk terpilih untuk ahli membership dan pelanggan walk-in.</textarea></label>
+         <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+          <div class="mb-4 flex items-center justify-between gap-3">
+           <div>
+            <p class="font-semibold text-white">Status Stok Produk</p>
+            <p class="mt-1 text-xs text-slate-500">Tick OOS bila barang habis stok. Tekan simpan untuk update paparan website.</p>
+           </div>
+           <span class="rounded-full bg-rose-500/10 px-3 py-1 text-xs font-semibold text-rose-300">OOS</span>
+          </div>
+          <div class="grid gap-3">
+           <label class="flex items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-300"><span>Air Garam Perisa Oren</span><span class="inline-flex items-center gap-2 font-semibold text-rose-300"><input data-dashboard-field="productStock_agaraorensatu" type="checkbox" class="h-4 w-4 rounded text-rose-500">OOS</span></label>
+           <label class="flex items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-300"><span>Hydrobuzz Gel Garam</span><span class="inline-flex items-center gap-2 font-semibold text-rose-300"><input data-dashboard-field="productStock_hydrobuzzgel" type="checkbox" class="h-4 w-4 rounded text-rose-500">OOS</span></label>
+           <label class="flex items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-300"><span>Air Garam Perisa Oren (3 units)</span><span class="inline-flex items-center gap-2 font-semibold text-rose-300"><input data-dashboard-field="productStock_agaraorentiga" type="checkbox" class="h-4 w-4 rounded text-rose-500">OOS</span></label>
+           <label class="flex items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-300"><span>Air Garam Perisa Oren (8 units)</span><span class="inline-flex items-center gap-2 font-semibold text-rose-300"><input data-dashboard-field="productStock_agaraorenlapan" type="checkbox" class="h-4 w-4 rounded text-rose-500">OOS</span></label>
+           <label class="flex items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-300"><span>Air Garam Perisa Oren (20 units)</span><span class="inline-flex items-center gap-2 font-semibold text-rose-300"><input data-dashboard-field="productStock_agaraorenlima" type="checkbox" class="h-4 w-4 rounded text-rose-500">OOS</span></label>
+          </div>
+          <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+           <p id="product-stock-save-message" class="hidden text-sm font-semibold text-emerald-300">Status stok telah disimpan.</p>
+           <button id="product-stock-save" type="button" class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-400 sm:ml-auto"><i data-lucide="save" class="h-4 w-4"></i>Simpan Status Stok</button>
+          </div>
+         </div>
+        </div>
+       </section>
+
+       <section id="panel-membership" class="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl">
+        <h4 class="text-xl font-bold text-white">Membership</h4>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+         <label class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-300"><input data-dashboard-field="benefitDiscount" type="checkbox" checked class="h-4 w-4 rounded text-emerald-500">Diskaun Ahli</label>
+         <label class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-300"><input data-dashboard-field="benefitReward" type="checkbox" checked class="h-4 w-4 rounded text-emerald-500">Ganjaran Istimewa</label>
+         <label class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-300"><input data-dashboard-field="benefitInfo" type="checkbox" checked class="h-4 w-4 rounded text-emerald-500">Maklumat Terkini</label>
+         <label class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm text-slate-300"><input data-dashboard-field="benefitCare" type="checkbox" checked class="h-4 w-4 rounded text-emerald-500">Kami Peduli</label>
+        </div>
+        <label class="mt-5 block text-sm"><span class="mb-2 block font-semibold text-slate-300">Link Pendaftaran</span><input data-dashboard-field="membershipLink" value="QR Membership Al Qanaah" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"></label>
+       </section>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+       <section id="panel-event" class="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl">
+        <h4 class="text-xl font-bold text-white">Event &amp; Video</h4>
+        <div class="mt-5 space-y-4">
+         <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4"><p class="font-semibold text-white">Santuni Komuniti Rukun Tetangga</p><p class="mt-1 text-xs text-slate-500">video/santuni komuniti rukun tertangga.mp4</p></div>
+         <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4"><p class="font-semibold text-white">Event Jelajah Orang Johor</p><p class="mt-1 text-xs text-slate-500">video/event jelajah orang johor.mp4</p></div>
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">Event Akan Datang</span><input data-dashboard-field="nextEvent" value="Program komuniti seterusnya" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"></label>
+        </div>
+       </section>
+
+       <section id="panel-contact" class="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl">
+        <h4 class="text-xl font-bold text-white">Tetapan Hubungi</h4>
+        <div class="mt-5 space-y-4">
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">WhatsApp</span><input data-dashboard-field="whatsapp" value="+60 12-345 6789" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"></label>
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">Telefon</span><input data-dashboard-field="phone" value="03-1234 5678" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"></label>
+         <label class="block text-sm"><span class="mb-2 block font-semibold text-slate-300">Email</span><input data-dashboard-field="email" value="info@alqanaah.com" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none focus:border-emerald-400"></label>
+        </div>
+       </section>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <div class="admin-protected fixed bottom-20 right-4 z-40 flex flex-col gap-3" aria-label="Pautan hubungi pantas">
+   <a href="https://wa.me/60123456789" target="_blank" rel="noopener" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl shadow-emerald-900/20 transition hover:bg-emerald-400" aria-label="WhatsApp Farmasi Al Qanaah"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+   <a href="tel:+60312345678" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-cyan-600 text-white shadow-xl shadow-cyan-900/20 transition hover:bg-cyan-500" aria-label="Telefon Farmasi Al Qanaah"><i data-lucide="phone" class="w-5 h-5"></i></a>
+  </div>
+  <a id="back-to-top" href="#" class="admin-protected back-to-top inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-800 text-white shadow-xl shadow-emerald-900/20 transition hover:bg-emerald-700" aria-label="Kembali ke atas"><i data-lucide="arrow-up" class="w-5 h-5"></i></a>
+  <div id="admin-lock-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 p-4">
+   <div class="w-full max-w-md rounded-[2rem] bg-white p-8 shadow-2xl">
+    <div class="text-center mb-6">
+     <h3 class="text-2xl font-bold text-emerald-900">Akses Dashboard Admin</h3>
+     <p class="text-sm text-slate-600 mt-2">Masukkan kata laluan untuk membuka panel pengurusan laman.</p>
+    </div>
+    <input id="dashboard-password-input" type="password" placeholder="Kata Laluan" class="w-full rounded-2xl border border-slate-300 px-4 py-3 text-slate-900 outline-none focus:border-emerald-500" />
+    <p id="dashboard-password-error" class="mt-3 hidden text-sm text-red-600">Kata laluan tidak sah. Sila cuba lagi.</p>
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+     <button id="dashboard-password-cancel" class="rounded-full border border-slate-300 px-5 py-3 text-sm text-slate-700 hover:bg-slate-100">Batal</button>
+     <button id="dashboard-password-submit" class="rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-400">Buka</button>
+    </div>
+   </div>
+  </div>
+  <footer class="admin-protected bg-emerald-900 text-white py-16">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+     <div>
+      <div class="flex items-center gap-2 mb-4">
+       <div class="h-10 w-24 overflow-hidden rounded-lg bg-black p-1 ring-1 ring-emerald-700/60">
+        <img src="../gambar/logo farmasi al qanaah ( petak ).jpeg" alt="Logo Farmasi Al Qanaah" class="h-full w-full object-contain" loading="lazy">
+       </div><span class="font-bold">Farmasi Al Qanaah</span>
+      </div>
+      <p class="text-emerald-300 text-sm">Rakan kesihatan dipercayai anda. Perkhidmatan farmasi profesional dan berkualiti.</p>
+     </div>
+     <div>
+      <h5 class="font-semibold mb-4 text-gold-400">Pautan Pantas</h5>
+      <ul class="space-y-2 text-sm text-emerald-300">
+       <li><a href="../tentang.html" class="hover:text-white transition">Profil Kami</a></li>
+       <li><a href="../perkhidmatan.html" class="hover:text-white transition">Perkhidmatan</a></li>
+       <li><a href="../produk.html" class="hover:text-white transition">Produk</a></li>
+       <li><a href="../cawangan.html" class="hover:text-white transition">Cawangan</a></li>
+      </ul>
+     </div>
+     <div>
+      <h5 class="font-semibold mb-4 text-gold-400">Sokongan</h5>
+      <ul class="space-y-2 text-sm text-emerald-300">
+       <li><a href="../perkhidmatan.html" class="hover:text-white transition">FAQ</a></li>
+       <li><a href="../cawangan.html" class="hover:text-white transition">Hubungi Kami</a></li>
+       <li><a href="../keahlian.html" class="hover:text-white transition">Keahlian</a></li>
+      </ul>
+     </div>
+     <div>
+      <h5 class="font-semibold mb-4 text-gold-400">Hubungi</h5>
+      <ul class="space-y-2 text-sm text-emerald-300">
+       <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 03-1234 5678</li>
+       <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> info@alqanaah.com</li>
+      </ul>
+     </div>
+    </div>
+    <div class="border-t border-emerald-800 pt-8 text-center text-sm text-emerald-400">
+     <p>&copy; 2024 Farmasi Al Qanaah Sdn Bhd. Semua hak cipta terpelihara.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+    const defaultConfig = {
+      hero_slogan: "Kesihatan Anda, Keutamaan Kami",
+      about_title: "Profil Kami Farmasi Al Qanaah",
+      membership_title: "Keahlian & Ganjaran",
+      background_color: "#ffffff",
+      surface_color: "#f9fafb",
+      text_color: "#064e3b",
+      primary_action_color: "#047857",
+      secondary_action_color: "#d97706",
+      font_family: "Playfair Display",
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const el = (id) => document.getElementById(id);
+      if (el('hero-slogan')) el('hero-slogan').textContent = config.hero_slogan || defaultConfig.hero_slogan;
+      if (el('about-title')) el('about-title').textContent = config.about_title || defaultConfig.about_title;
+      if (el('membership-title')) el('membership-title').textContent = config.membership_title || defaultConfig.membership_title;
+
+      const font = config.font_family || defaultConfig.font_family;
+      document.querySelectorAll('.font-display').forEach(e => e.style.fontFamily = `${font}, serif`);
+
+      const size = config.font_size || defaultConfig.font_size;
+      document.body.style.fontSize = `${size}px`;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => applyConfig(config),
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+            { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+            { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+            { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+            { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+          ],
+          borderables: [],
+          fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+          fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["hero_slogan", config.hero_slogan || defaultConfig.hero_slogan],
+          ["about_title", config.about_title || defaultConfig.about_title],
+          ["membership_title", config.membership_title || defaultConfig.membership_title]
+        ])
+      });
+    } else {
+      applyConfig(defaultConfig);
+    }
+
+    const ADMIN_LOGIN_PASSWORD = 'aqp123';
+    const ADMIN_SESSION_KEY = 'aqpAdminAuthenticated';
+    const adminLoginForm = document.getElementById('admin-login-form');
+    const adminLoginUsername = document.getElementById('admin-login-username');
+    const adminLoginPassword = document.getElementById('admin-login-password');
+    const adminLoginError = document.getElementById('admin-login-error');
+    const adminLogout = document.getElementById('admin-logout');
+
+    function showAdminDashboard() {
+      document.body.classList.add('admin-authenticated');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function hideAdminDashboard() {
+      document.body.classList.remove('admin-authenticated');
+      if (adminLoginPassword) adminLoginPassword.value = '';
+      if (adminLoginError) adminLoginError.classList.add('hidden');
+      setTimeout(() => adminLoginUsername?.focus(), 100);
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const username = adminLoginUsername?.value.trim() || '';
+      const password = adminLoginPassword?.value || '';
+      if (username && password === ADMIN_LOGIN_PASSWORD) {
+        sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
+        if (adminLoginError) adminLoginError.classList.add('hidden');
+        showAdminDashboard();
+      } else {
+        if (adminLoginError) adminLoginError.classList.remove('hidden');
+        if (adminLoginPassword) adminLoginPassword.value = '';
+        adminLoginPassword?.focus();
+      }
+    }
+
+    if (sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true') {
+      showAdminDashboard();
+    } else {
+      hideAdminDashboard();
+    }
+
+    if (adminLoginForm) adminLoginForm.addEventListener('submit', handleAdminLogin);
+    if (adminLogout) adminLogout.addEventListener('click', () => {
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+      hideAdminDashboard();
+    });
+
+    if (window.lucide) lucide.createIcons();
+
+    function setActiveNavigation() {
+      const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('nav a[href$=".html"]').forEach(link => {
+        const targetPage = link.getAttribute('href').split('#')[0].toLowerCase();
+        if (targetPage === currentPage) {
+          link.classList.add('nav-active');
+          link.setAttribute('aria-current', 'page');
+        }
+      });
+    }
+
+    setActiveNavigation();
+
+    const nav = document.querySelector('nav');
+    const progressBar = document.getElementById('scroll-progress');
+    const mobileMenuButton = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const backToTop = document.getElementById('back-to-top');
+
+    function updateScrollUI() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+      if (progressBar) progressBar.style.width = `${percent}%`;
+      if (nav) nav.classList.toggle('nav-scrolled', window.scrollY > 12);
+      if (backToTop) backToTop.classList.toggle('show', window.scrollY > 600);
+    }
+
+    window.addEventListener('scroll', updateScrollUI, { passive: true });
+    updateScrollUI();
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+        mobileMenuButton.innerHTML = isOpen ? '<i data-lucide="x" class="w-6 h-6"></i>' : '<i data-lucide="menu" class="w-6 h-6"></i>';
+        if (window.lucide) lucide.createIcons();
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+          if (window.lucide) lucide.createIcons();
+        });
+      });
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        if (href === '#') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const revealItems = document.querySelectorAll('section, .card-hover, .stat-card, footer');
+    revealItems.forEach(item => item.classList.add('reveal'));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    const branchDetails = document.querySelectorAll('#branches details');
+    branchDetails.forEach(details => {
+      details.addEventListener('toggle', () => {
+        if (!details.open) return;
+        branchDetails.forEach(otherDetails => {
+          if (otherDetails !== details) otherDetails.open = false;
+        });
+      });
+
+      const branchCard = details.closest('.card-hover');
+      if (branchCard) {
+        branchCard.addEventListener('click', event => {
+          if (event.target.closest('a, button, summary')) return;
+          details.open = !details.open;
+        });
+      }
+    });
+
+    // Highlight active section in main navigation
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const sections = document.querySelectorAll('section[id]');
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = document.querySelector(`nav a[href="#${id}"]`);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach(item => item.classList.remove('text-emerald-900', 'font-semibold'));
+          link.classList.add('text-emerald-900', 'font-semibold');
+        }
+      });
+    }, { root: null, rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // Category filter for product cards
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const productCards = document.querySelectorAll('[data-category]');
+    const productEmpty = document.getElementById('product-empty');
+
+    function updateProductFilter(selectedCategory) {
+      filterButtons.forEach(btn => {
+        const isActive = btn.dataset.filter === selectedCategory;
+        btn.classList.toggle('bg-emerald-500', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('border-emerald-400', isActive);
+        btn.classList.toggle('bg-slate-800/80', !isActive);
+        btn.classList.toggle('text-slate-100', !isActive);
+      });
+
+      let visibleCount = 0;
+      productCards.forEach(card => {
+        const match = selectedCategory === 'all' || card.dataset.category === selectedCategory;
+        card.classList.toggle('hidden', !match);
+        if (match) visibleCount += 1;
+      });
+
+      if (productEmpty) {
+        productEmpty.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        updateProductFilter(btn.dataset.filter);
+      });
+    });
+
+    updateProductFilter('all');
+
+
+    const dashboardSave = document.getElementById('dashboard-save');
+    const dashboardReset = document.getElementById('dashboard-reset');
+    const dashboardStatus = document.getElementById('dashboard-status');
+    const dashboardFields = document.querySelectorAll('[data-dashboard-field]');
+    const outletTableBody = document.getElementById('outlet-table-body');
+    const outletCountBadge = document.getElementById('outlet-count-badge');
+    const outletTotalCount = document.getElementById('outlet-total-count');
+    const addOutletButton = document.getElementById('add-outlet');
+    const outletNameInput = document.getElementById('new-outlet-name');
+    const outletLocationInput = document.getElementById('new-outlet-location');
+    const outletStatusInput = document.getElementById('new-outlet-status');
+    const outletDateInput = document.getElementById('new-outlet-date');
+    const outletFormError = document.getElementById('outlet-form-error');
+    const productStockSave = document.getElementById('product-stock-save');
+    const productStockSaveMessage = document.getElementById('product-stock-save-message');
+    let extraOutlets = [];
+
+    function readDashboardDraft() {
+      try {
+        return JSON.parse(localStorage.getItem('aqpDashboardDraft') || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function applyDashboardDraft() {
+      const draft = readDashboardDraft();
+      dashboardFields.forEach(field => {
+        const key = field.dataset.dashboardField;
+        if (!(key in draft)) return;
+        if (field.type === 'checkbox') {
+          field.checked = Boolean(draft[key]);
+        } else {
+          field.value = draft[key];
+        }
+      });
+      extraOutlets = Array.isArray(draft.extraOutlets) ? draft.extraOutlets : [];
+      renderExtraOutlets();
+    }
+
+    function buildProductStock(stockSource) {
+      return {
+        agaraorensatu: Boolean(stockSource.productStock_agaraorensatu),
+        hydrobuzzgel: Boolean(stockSource.productStock_hydrobuzzgel),
+        agaraorentiga: Boolean(stockSource.productStock_agaraorentiga),
+        agaraorenlapan: Boolean(stockSource.productStock_agaraorenlapan),
+        agaraorenlima: Boolean(stockSource.productStock_agaraorenlima)
+      };
+    }
+
+    async function writeProductStock(stockSource) {
+      const stock = buildProductStock(stockSource);
+      localStorage.setItem('aqpProductStock', JSON.stringify(stock));
+
+      try {
+        const response = await fetch('save-product-stock.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(stock)
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Save failed');
+        return true;
+      } catch (error) {
+        console.warn('Product stock saved locally only:', error);
+        return false;
+      }
+    }
+
+    async function saveDashboardDraft() {
+      const draft = {};
+      dashboardFields.forEach(field => {
+        draft[field.dataset.dashboardField] = field.type === 'checkbox' ? field.checked : field.value;
+      });
+      draft.extraOutlets = extraOutlets;
+      localStorage.setItem('aqpDashboardDraft', JSON.stringify(draft));
+      const stockSaved = await writeProductStock(draft);
+      if (dashboardStatus) {
+        dashboardStatus.textContent = stockSaved ? 'Draf dashboard telah disimpan.' : 'Draf disimpan, tetapi status stok hanya tersimpan pada browser ini.';
+        dashboardStatus.classList.remove('hidden');
+        setTimeout(() => dashboardStatus.classList.add('hidden'), 2500);
+      }
+      return stockSaved;
+    }
+
+    async function loadProductStockFromServer() {
+      try {
+        const response = await fetch(`../data/product-stock.json?ts=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) return;
+        const stock = await response.json();
+        Object.entries(stock).forEach(([key, value]) => {
+          const input = document.querySelector(`[data-dashboard-field="productStock_${key}"]`);
+          if (input) input.checked = Boolean(value);
+        });
+      } catch (error) {
+        console.warn('Cannot load product stock:', error);
+      }
+    }
+
+    function updateOutletCount() {
+      if (!outletTableBody) return;
+      const baseCount = outletTableBody.querySelectorAll('[data-base-outlet]').length;
+      const total = baseCount + extraOutlets.length;
+      if (outletCountBadge) outletCountBadge.textContent = `${total} outlet`;
+      if (outletTotalCount) outletTotalCount.textContent = total;
+    }
+
+    function createOutletCell(text, isName = false) {
+      const cell = document.createElement('td');
+      cell.className = isName ? 'py-4 pr-4 font-semibold text-white' : 'py-4 pr-4';
+      cell.textContent = text || '-';
+      return cell;
+    }
+
+    function createOutletStatusSelect(outlet, index) {
+      const select = document.createElement('select');
+      select.className = 'rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs font-semibold text-slate-100 outline-none transition focus:border-emerald-400';
+      select.dataset.extraOutletStatus = String(index);
+      ['Aktif', 'Akan Dibuka', 'Tutup'].forEach(status => {
+        const option = document.createElement('option');
+        option.textContent = status;
+        option.selected = outlet.status === status;
+        select.appendChild(option);
+      });
+      return select;
+    }
+
+    function renderExtraOutlets() {
+      if (!outletTableBody) return;
+      outletTableBody.querySelectorAll('[data-extra-outlet]').forEach(row => row.remove());
+
+      extraOutlets.forEach((outlet, index) => {
+        const row = document.createElement('tr');
+        row.dataset.extraOutlet = String(index);
+
+        row.appendChild(createOutletCell(outlet.name, true));
+        row.appendChild(createOutletCell(outlet.location));
+
+        const statusCell = document.createElement('td');
+        statusCell.className = 'py-4 pr-4';
+        statusCell.appendChild(createOutletStatusSelect(outlet, index));
+        row.appendChild(statusCell);
+
+        row.appendChild(createOutletCell(outlet.date));
+
+        const actionCell = document.createElement('td');
+        actionCell.className = 'py-4 pr-4';
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'inline-flex items-center justify-center gap-2 rounded-full border border-rose-400/30 px-3 py-1 text-xs font-semibold text-rose-200 transition hover:bg-rose-500/10';
+        removeButton.dataset.removeOutlet = String(index);
+        removeButton.innerHTML = '<i data-lucide="trash-2" class="h-3.5 w-3.5"></i>Buang';
+        actionCell.appendChild(removeButton);
+        row.appendChild(actionCell);
+
+        outletTableBody.appendChild(row);
+      });
+
+      updateOutletCount();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function clearOutletForm() {
+      if (outletNameInput) outletNameInput.value = '';
+      if (outletLocationInput) outletLocationInput.value = '';
+      if (outletStatusInput) outletStatusInput.value = 'Akan Dibuka';
+      if (outletDateInput) outletDateInput.value = '';
+      if (outletFormError) outletFormError.classList.add('hidden');
+    }
+
+    function addExtraOutlet() {
+      const name = outletNameInput?.value.trim() || '';
+      const location = outletLocationInput?.value.trim() || '';
+      if (!name || !location) {
+        if (outletFormError) outletFormError.classList.remove('hidden');
+        return;
+      }
+
+      extraOutlets.push({
+        name,
+        location,
+        status: outletStatusInput?.value || 'Akan Dibuka',
+        date: outletDateInput?.value.trim() || 'Belum ditetapkan'
+      });
+      renderExtraOutlets();
+      clearOutletForm();
+      saveDashboardDraft();
+    }
+
+    if (addOutletButton) addOutletButton.addEventListener('click', addExtraOutlet);
+    if (outletTableBody) outletTableBody.addEventListener('click', (event) => {
+      const removeButton = event.target.closest('[data-remove-outlet]');
+      if (!removeButton) return;
+      const index = Number(removeButton.dataset.removeOutlet);
+      extraOutlets.splice(index, 1);
+      renderExtraOutlets();
+      saveDashboardDraft();
+    });
+
+    if (outletTableBody) outletTableBody.addEventListener('change', (event) => {
+      const statusSelect = event.target.closest('[data-extra-outlet-status]');
+      if (!statusSelect) return;
+      const index = Number(statusSelect.dataset.extraOutletStatus);
+      if (extraOutlets[index]) {
+        extraOutlets[index].status = statusSelect.value;
+        saveDashboardDraft();
+      }
+    });
+
+    if (dashboardSave) dashboardSave.addEventListener('click', () => {
+      saveDashboardDraft();
+    });
+    if (productStockSave) productStockSave.addEventListener('click', async () => {
+      productStockSave.disabled = true;
+      const stockSaved = await saveDashboardDraft();
+      if (productStockSaveMessage) {
+        productStockSaveMessage.textContent = stockSaved ? 'Status stok telah disimpan dan website boleh di-refresh.' : 'Status stok gagal disimpan ke website. Pastikan buka melalui XAMPP/localhost.';
+        productStockSaveMessage.classList.toggle('text-emerald-300', stockSaved);
+        productStockSaveMessage.classList.toggle('text-rose-300', !stockSaved);
+        productStockSaveMessage.classList.remove('hidden');
+        setTimeout(() => productStockSaveMessage.classList.add('hidden'), 3500);
+      }
+      productStockSave.disabled = false;
+    });
+    if (dashboardReset) dashboardReset.addEventListener('click', async () => {
+      localStorage.removeItem('aqpDashboardDraft');
+      localStorage.removeItem('aqpProductStock');
+      await fetch('save-product-stock.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agaraorensatu: false,
+          hydrobuzzgel: false,
+          agaraorentiga: false,
+          agaraorenlapan: false,
+          agaraorenlima: false
+        })
+      }).catch(() => {});
+      window.location.reload();
+    });
+    applyDashboardDraft();
+    loadProductStockFromServer();
+
+    const ADMIN_PASSWORD = 'AlQanaah2024!';
+    const openAdminButton = document.getElementById('open-admin-dashboard');
+    const closeAdminButton = document.getElementById('dashboard-password-cancel');
+    const submitAdminButton = document.getElementById('dashboard-password-submit');
+    const lockModal = document.getElementById('admin-lock-modal');
+    const passwordInput = document.getElementById('dashboard-password-input');
+    const passwordError = document.getElementById('dashboard-password-error');
+    const adminPanel = document.getElementById('admin-dashboard-panel');
+    const closeAdminPanel = document.getElementById('close-admin-panel');
+    const adminHeroSlogan = document.getElementById('admin-hero-slogan');
+    const adminAboutTitle = document.getElementById('admin-about-title');
+    const adminOverviewText = document.getElementById('admin-overview-text');
+    const adminMembershipTitle = document.getElementById('admin-membership-title');
+    const adminSaveButton = document.getElementById('admin-save-content');
+    const adminSaveMessage = document.getElementById('admin-save-message');
+
+    function openAdminLock() {
+      lockModal.classList.remove('hidden');
+      setTimeout(() => passwordInput.focus(), 100);
+    }
+
+    function closeAdminLock() {
+      lockModal.classList.add('hidden');
+      passwordInput.value = '';
+      passwordError.classList.add('hidden');
+    }
+
+    function fillAdminForm() {
+      if (adminHeroSlogan) adminHeroSlogan.value = document.getElementById('hero-slogan')?.textContent || '';
+      if (adminAboutTitle) adminAboutTitle.value = document.getElementById('about-title')?.textContent || '';
+      if (adminOverviewText) adminOverviewText.value = document.getElementById('overview-text')?.textContent || '';
+      if (adminMembershipTitle) adminMembershipTitle.value = document.getElementById('membership-title')?.textContent || '';
+    }
+
+    function unlockAdmin() {
+      if (passwordInput.value === ADMIN_PASSWORD) {
+        closeAdminLock();
+        adminPanel.classList.remove('hidden');
+        fillAdminForm();
+      } else {
+        passwordError.classList.remove('hidden');
+      }
+    }
+
+    function saveAdminContent() {
+      const hero = document.getElementById('hero-slogan');
+      const about = document.getElementById('about-title');
+      const overview = document.getElementById('overview-text');
+      const membership = document.getElementById('membership-title');
+      if (hero && adminHeroSlogan) hero.textContent = adminHeroSlogan.value;
+      if (about && adminAboutTitle) about.textContent = adminAboutTitle.value;
+      if (overview && adminOverviewText) overview.textContent = adminOverviewText.value;
+      if (membership && adminMembershipTitle) membership.textContent = adminMembershipTitle.value;
+      if (adminSaveMessage) {
+        adminSaveMessage.classList.remove('hidden');
+        setTimeout(() => adminSaveMessage.classList.add('hidden'), 2500);
+      }
+    }
+
+    if (openAdminButton) openAdminButton.addEventListener('click', openAdminLock);
+    if (closeAdminButton) closeAdminButton.addEventListener('click', closeAdminLock);
+    if (submitAdminButton) submitAdminButton.addEventListener('click', unlockAdmin);
+    if (passwordInput) passwordInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') unlockAdmin();
+    });
+    if (closeAdminPanel) closeAdminPanel.addEventListener('click', () => adminPanel.classList.add('hidden'));
+    if (adminSaveButton) adminSaveButton.addEventListener('click', saveAdminContent);
+  </script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ms" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmasi Al Qanaah</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: { 50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b' },
+            gold: { 50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706' },
+            navy: { 800:'#1e3a5f',900:'#0f2744' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-white text-gray-800 overflow-auto"><!-- Navigation -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50 border-b border-emerald-100">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+     <div class="flex items-center gap-2">
+      <div class="w-10 h-10 rounded-full bg-emerald-800 flex items-center justify-center"><span class="text-gold-400 font-bold text-lg">A</span>
+      </div>
+      <div>
+       <h1 class="text-emerald-900 font-bold text-lg leading-tight">Farmasi Al Qanaah</h1>
+       <p class="text-[10px] text-emerald-600 tracking-wider uppercase">Premium Healthcare</p>
+      </div>
+     </div>
+     <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-700"><a href="#about" class="hover:text-emerald-700 transition">Profil Kami</a> <a href="#services" class="hover:text-emerald-700 transition">Perkhidmatan</a> <a href="#products" class="hover:text-emerald-700 transition">Produk</a> <a href="#membership" class="hover:text-emerald-700 transition">Keahlian</a> <a href="#branches" class="hover:text-emerald-700 transition">Cawangan</a>
+     </div>
+     <div class="hidden lg:flex items-center gap-3"><button class="px-4 py-2 text-sm font-medium text-emerald-800 border border-emerald-200 rounded-full hover:bg-emerald-50 transition">Log Masuk</button> <button class="px-4 py-2 text-sm font-medium text-white bg-emerald-700 rounded-full hover:bg-emerald-800 transition">Daftar</button>
+     </div><button id="mobile-menu-btn" class="lg:hidden p-2 text-emerald-800"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    </div>
+   </div>
+  </nav><!-- Hero Section -->
+  <section class="hero-bg pt-28 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
+   <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-10 right-10 w-72 h-72 rounded-full border border-gold-400"></div>
+    <div class="absolute bottom-10 left-10 w-96 h-96 rounded-full border border-emerald-300"></div>
+   </div>
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="max-w-3xl">
+     <p class="text-emerald-300 text-sm font-medium tracking-widest uppercase mb-4 animate-fade-up">Farmasi Korporat Premium Malaysia</p>
+     <h2 id="hero-slogan" class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-up animate-delay-1">Kesihatan Anda, Keutamaan Kami</h2>
+     <p class="text-emerald-200 text-lg mb-10 max-w-xl animate-fade-up animate-delay-2">Rakan kesihatan dipercayai dengan perkhidmatan farmasi bertaraf antarabangsa dan penjagaan peribadi untuk setiap pelanggan.</p>
+     <div class="flex flex-wrap gap-4 animate-fade-up animate-delay-3"><button class="px-8 py-3.5 bg-gold-500 text-emerald-900 font-semibold rounded-full hover:bg-gold-400 transition shadow-lg">Beli Sekarang</button> <button class="px-8 py-3.5 bg-white/10 text-white font-medium rounded-full border border-white/30 hover:bg-white/20 transition">Tempah Konsultasi</button> <button class="px-8 py-3.5 bg-transparent text-gold-300 font-medium rounded-full border border-gold-400/50 hover:bg-gold-400/10 transition">Sertai Keahlian</button>
+     </div>
+    </div>
+    <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl animate-fade-up animate-delay-4">
+     <div class="text-center">
+      <p class="text-3xl font-bold text-white">15+</p>
+      <p class="text-emerald-300 text-xs">Cawangan</p>
+     </div>
+     <div class="text-center">
+      <p class="text-3xl font-bold text-white">50K+</p>
+      <p class="text-emerald-300 text-xs">Pelanggan</p>
+     </div>
+     <div class="text-center">
+      <p class="text-3xl font-bold text-white">100+</p>
+      <p class="text-emerald-300 text-xs">Farmasis</p>
+     </div>
+     <div class="text-center">
+      <p class="text-3xl font-bold text-white">10K+</p>
+      <p class="text-emerald-300 text-xs">Produk</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- About Section -->
+  <section id="about" class="py-20 lg:py-28 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-600 font-medium text-sm tracking-widest uppercase mb-2">Mengenai Kami</p>
+     <h3 id="about-title" class="font-display text-3xl lg:text-4xl font-bold text-emerald-900">Profil Kami Farmasi Al Qanaah</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+     <div>
+      <p class="text-gray-600 leading-relaxed mb-6">Farmasi Al Qanaah ditubuhkan dengan visi untuk menjadi rangkaian farmasi korporat terkemuka di Malaysia yang mengutamakan penjagaan kesihatan holistik dan perkhidmatan farmasi berkualiti tinggi.</p>
+      <p class="text-gray-600 leading-relaxed mb-8">Dengan pasukan farmasis profesional berdaftar dan komitmen terhadap kecemerlangan, kami menyediakan perkhidmatan kesihatan komprehensif yang setanding dengan jenama farmasi antarabangsa.</p>
+      <div class="grid grid-cols-2 gap-4">
+       <div class="p-4 bg-emerald-50 rounded-xl">
+        <p class="font-semibold text-emerald-800 text-sm">Visi</p>
+        <p class="text-xs text-gray-600 mt-1">Farmasi korporat #1 Malaysia</p>
+       </div>
+       <div class="p-4 bg-emerald-50 rounded-xl">
+        <p class="font-semibold text-emerald-800 text-sm">Misi</p>
+        <p class="text-xs text-gray-600 mt-1">Kesihatan berkualiti untuk semua</p>
+       </div>
+       <div class="p-4 bg-gold-50 rounded-xl">
+        <p class="font-semibold text-emerald-800 text-sm">Nilai</p>
+        <p class="text-xs text-gray-600 mt-1">Integriti, Profesional, Prihatin</p>
+       </div>
+       <div class="p-4 bg-gold-50 rounded-xl">
+        <p class="font-semibold text-emerald-800 text-sm">Standard</p>
+        <p class="text-xs text-gray-600 mt-1">ISO &amp; GMP Certified</p>
+       </div>
+      </div>
+     </div>
+     <div class="bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-2xl p-8 text-white">
+      <h4 class="font-display text-2xl font-bold mb-6">Pasukan Profesional</h4>
+      <div class="space-y-4">
+       <div class="flex items-center gap-4 bg-white/10 rounded-xl p-4">
+        <div class="w-12 h-12 bg-gold-500/20 rounded-full flex items-center justify-center">
+         <i data-lucide="user-check" class="w-5 h-5 text-gold-400"></i>
+        </div>
+        <div>
+         <p class="font-medium">Farmasis Berdaftar</p>
+         <p class="text-emerald-300 text-sm">Bertauliah &amp; berpengalaman</p>
+        </div>
+       </div>
+       <div class="flex items-center gap-4 bg-white/10 rounded-xl p-4">
+        <div class="w-12 h-12 bg-gold-500/20 rounded-full flex items-center justify-center">
+         <i data-lucide="shield-check" class="w-5 h-5 text-gold-400"></i>
+        </div>
+        <div>
+         <p class="font-medium">Kelulusan KKM</p>
+         <p class="text-emerald-300 text-sm">Pematuhan penuh regulasi</p>
+        </div>
+       </div>
+       <div class="flex items-center gap-4 bg-white/10 rounded-xl p-4">
+        <div class="w-12 h-12 bg-gold-500/20 rounded-full flex items-center justify-center">
+         <i data-lucide="award" class="w-5 h-5 text-gold-400"></i>
+        </div>
+        <div>
+         <p class="font-medium">Latihan Berterusan</p>
+         <p class="text-emerald-300 text-sm">CPD &amp; kemaskini terkini</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Services Section -->
+  <section id="services" class="py-20 lg:py-28 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-600 font-medium text-sm tracking-widest uppercase mb-2">Perkhidmatan</p>
+     <h3 class="font-display text-3xl lg:text-4xl font-bold text-emerald-900">Perkhidmatan Kesihatan</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+       <i data-lucide="activity" class="w-6 h-6 text-emerald-700"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 mb-2">Saringan Kesihatan</h4>
+      <p class="text-sm text-gray-600">Pemeriksaan kesihatan menyeluruh termasuk profil lipid, fungsi hati &amp; buah pinggang.</p>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+       <i data-lucide="heart-pulse" class="w-6 h-6 text-emerald-700"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 mb-2">Tekanan Darah &amp; Glukosa</h4>
+      <p class="text-sm text-gray-600">Pemantauan tekanan darah dan gula dalam darah secara percuma di semua cawangan.</p>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+       <i data-lucide="stethoscope" class="w-6 h-6 text-emerald-700"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 mb-2">Konsultasi Ubat</h4>
+      <p class="text-sm text-gray-600">Khidmat nasihat ubat oleh farmasis berdaftar untuk pengurusan ubat optimum.</p>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center mb-4">
+       <i data-lucide="file-text" class="w-6 h-6 text-gold-600"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 mb-2">Isi Semula Preskripsi</h4>
+      <p class="text-sm text-gray-600">Kemudahan isi semula preskripsi secara online atau walk-in di semua cawangan.</p>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center mb-4">
+       <i data-lucide="truck" class="w-6 h-6 text-gold-600"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 mb-2">Penghantaran Ke Rumah</h4>
+      <p class="text-sm text-gray-600">Penghantaran ubat dan produk kesihatan terus ke pintu rumah anda.</p>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center mb-4">
+       <i data-lucide="users" class="w-6 h-6 text-gold-600"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 mb-2">Program Komuniti</h4>
+      <p class="text-sm text-gray-600">Kempen kesedaran kesihatan dan program saringan untuk komuniti setempat.</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Products Section -->
+  <section id="products" class="py-20 lg:py-28 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-600 font-medium text-sm tracking-widest uppercase mb-2">Produk</p>
+     <h3 class="font-display text-3xl lg:text-4xl font-bold text-emerald-900">Kategori Produk</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+     <div class="card-hover group bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-6 text-center cursor-pointer border border-emerald-200/50">
+      <div class="w-14 h-14 mx-auto bg-emerald-700 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+       <i data-lucide="pill" class="w-7 h-7 text-white"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 text-sm">Ubat Preskripsi</h4>
+     </div>
+     <div class="card-hover group bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-6 text-center cursor-pointer border border-emerald-200/50">
+      <div class="w-14 h-14 mx-auto bg-emerald-700 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+       <i data-lucide="tablets" class="w-7 h-7 text-white"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 text-sm">Ubat OTC</h4>
+     </div>
+     <div class="card-hover group bg-gradient-to-br from-gold-50 to-gold-100 rounded-2xl p-6 text-center cursor-pointer border border-gold-200/50">
+      <div class="w-14 h-14 mx-auto bg-gold-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+       <i data-lucide="sparkles" class="w-7 h-7 text-white"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 text-sm">Vitamin &amp; Suplemen</h4>
+     </div>
+     <div class="card-hover group bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-6 text-center cursor-pointer border border-pink-200/50">
+      <div class="w-14 h-14 mx-auto bg-pink-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+       <i data-lucide="baby" class="w-7 h-7 text-white"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 text-sm">Bayi &amp; Ibu</h4>
+     </div>
+     <div class="card-hover group bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center cursor-pointer border border-blue-200/50">
+      <div class="w-14 h-14 mx-auto bg-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+       <i data-lucide="smile" class="w-7 h-7 text-white"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 text-sm">Penjagaan Diri</h4>
+     </div>
+     <div class="card-hover group bg-gradient-to-br from-navy-800/5 to-navy-900/10 rounded-2xl p-6 text-center cursor-pointer border border-gray-200">
+      <div class="w-14 h-14 mx-auto bg-navy-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+       <i data-lucide="monitor" class="w-7 h-7 text-white"></i>
+      </div>
+      <h4 class="font-semibold text-emerald-900 text-sm">Alat Perubatan</h4>
+     </div>
+    </div>
+   </div>
+  </section><!-- Membership Section -->
+  <section id="membership" class="py-20 lg:py-28 bg-gradient-to-br from-emerald-900 via-emerald-800 to-navy-900 text-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-400 font-medium text-sm tracking-widest uppercase mb-2">Eksklusif</p>
+     <h3 id="membership-title" class="font-display text-3xl lg:text-4xl font-bold">Keahlian &amp; Ganjaran</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+     <div class="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/10 text-center">
+      <div class="w-12 h-12 mx-auto bg-gold-500/20 rounded-full flex items-center justify-center mb-4">
+       <i data-lucide="star" class="w-6 h-6 text-gold-400"></i>
+      </div>
+      <h4 class="font-semibold mb-2">Mata Ganjaran</h4>
+      <p class="text-emerald-200 text-sm">Kumpul mata setiap pembelian untuk ditebus.</p>
+     </div>
+     <div class="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/10 text-center">
+      <div class="w-12 h-12 mx-auto bg-gold-500/20 rounded-full flex items-center justify-center mb-4">
+       <i data-lucide="gift" class="w-6 h-6 text-gold-400"></i>
+      </div>
+      <h4 class="font-semibold mb-2">Ganjaran Hari Lahir</h4>
+      <p class="text-emerald-200 text-sm">Diskaun istimewa sempena hari lahir anda.</p>
+     </div>
+     <div class="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/10 text-center">
+      <div class="w-12 h-12 mx-auto bg-gold-500/20 rounded-full flex items-center justify-center mb-4">
+       <i data-lucide="percent" class="w-6 h-6 text-gold-400"></i>
+      </div>
+      <h4 class="font-semibold mb-2">Promosi Eksklusif</h4>
+      <p class="text-emerald-200 text-sm">Akses awal ke promosi ahli sahaja.</p>
+     </div>
+     <div class="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/10 text-center">
+      <div class="w-12 h-12 mx-auto bg-gold-500/20 rounded-full flex items-center justify-center mb-4">
+       <i data-lucide="user-plus" class="w-6 h-6 text-gold-400"></i>
+      </div>
+      <h4 class="font-semibold mb-2">Ganjaran Rujukan</h4>
+      <p class="text-emerald-200 text-sm">Jemput rakan dan terima kredit percuma.</p>
+     </div>
+    </div>
+    <div class="text-center mt-10"><button class="px-10 py-4 bg-gold-500 text-emerald-900 font-bold rounded-full hover:bg-gold-400 transition shadow-xl text-lg">Daftar Keahlian Sekarang</button>
+    </div>
+   </div>
+  </section><!-- Branch Locator -->
+  <section id="branches" class="py-20 lg:py-28 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-600 font-medium text-sm tracking-widest uppercase mb-2">Lokasi</p>
+     <h3 class="font-display text-3xl lg:text-4xl font-bold text-emerald-900">Cawangan Kami</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH SIERRA PERDANA</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH AIR BIRU</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH SERI ALAM</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH SCIENTEX</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH TAMAN SURIA</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH PULAI MUTIARA</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH KEMPAS</h4>
+      </div>
+     </div>
+     <div class="card-hover bg-white rounded-2xl p-6 border border-gray-100">
+      <div class="flex items-center gap-3 mb-3">
+       <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+        <i data-lucide="map-pin" class="w-5 h-5 text-emerald-700"></i>
+       </div>
+       <h4 class="font-semibold text-emerald-900">FARMASI AL QANAAH SRI SAUJANA</h4>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Testimonials -->
+  <section class="py-20 lg:py-28 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-600 font-medium text-sm tracking-widest uppercase mb-2">Testimoni</p>
+     <h3 class="font-display text-3xl lg:text-4xl font-bold text-emerald-900">Apa Kata Pelanggan</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mb-16">
+     <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+      <div class="flex gap-1 mb-3">
+       <i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i>
+      </div>
+      <p class="text-sm text-gray-700 mb-4 italic">"Perkhidmatan sangat profesional. Farmasis sentiasa sedia membantu dan memberi nasihat yang berguna."</p>
+      <p class="font-semibold text-emerald-800 text-sm">— Puan Fatimah, Shah Alam</p>
+     </div>
+     <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+      <div class="flex gap-1 mb-3">
+       <i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i>
+      </div>
+      <p class="text-sm text-gray-700 mb-4 italic">"Harga berpatutan dengan produk berkualiti. Penghantaran ke rumah sangat memudahkan saya."</p>
+      <p class="font-semibold text-emerald-800 text-sm">— Encik Ahmad, PJ</p>
+     </div>
+     <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+      <div class="flex gap-1 mb-3">
+       <i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i><i data-lucide="star" class="w-4 h-4 text-gold-500 fill-current"></i>
+      </div>
+      <p class="text-sm text-gray-700 mb-4 italic">"Program keahlian terbaik! Banyak diskaun dan ganjaran yang menguntungkan."</p>
+      <p class="font-semibold text-emerald-800 text-sm">— Cik Nurul, KL</p>
+     </div>
+    </div><!-- Corporate Partners -->
+    <div class="text-center">
+     <p class="text-sm text-gray-500 uppercase tracking-widest mb-6">Rakan Korporat Kami</p>
+     <div class="flex flex-wrap justify-center gap-8 items-center opacity-60">
+      <div class="bg-gray-100 rounded-xl px-6 py-3 font-bold text-gray-500">
+       PETRONAS
+      </div>
+      <div class="bg-gray-100 rounded-xl px-6 py-3 font-bold text-gray-500">
+       MAYBANK
+      </div>
+      <div class="bg-gray-100 rounded-xl px-6 py-3 font-bold text-gray-500">
+       TNB
+      </div>
+      <div class="bg-gray-100 rounded-xl px-6 py-3 font-bold text-gray-500">
+       TM
+      </div>
+      <div class="bg-gray-100 rounded-xl px-6 py-3 font-bold text-gray-500">
+       PROTON
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Admin Dashboard Preview -->
+  <section id="dashboard" class="py-20 lg:py-28 bg-gray-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <p class="text-gold-600 font-medium text-sm tracking-widest uppercase mb-2">Sistem Pengurusan</p>
+     <h3 class="font-display text-3xl lg:text-4xl font-bold text-emerald-900">Admin Dashboard</h3>
+     <div class="w-16 h-1 bg-gold-500 mx-auto mt-4"></div>
+     <p class="text-gray-500 text-sm mt-3">Pratonton sistem pengurusan dalaman</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+     <div class="bg-emerald-900 px-6 py-3 flex items-center gap-2">
+      <div class="w-3 h-3 rounded-full bg-red-400"></div>
+      <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+      <div class="w-3 h-3 rounded-full bg-green-400"></div><span class="text-white/60 text-xs ml-4">dashboard.farmasialqanaah.com</span>
+     </div>
+     <div class="p-6 lg:p-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+       <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="package" class="w-4 h-4 text-emerald-600"></i><span class="text-xs text-gray-500">Inventori</span>
+        </div>
+        <p class="text-2xl font-bold text-emerald-800">12,458</p>
+        <p class="text-xs text-green-600">+2.4% bulan ini</p>
+       </div>
+       <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i><span class="text-xs text-gray-500">Jualan</span>
+        </div>
+        <p class="text-2xl font-bold text-blue-800">RM 284K</p>
+        <p class="text-xs text-green-600">+8.1% bulan ini</p>
+       </div>
+       <div class="bg-purple-50 rounded-xl p-4 border border-purple-100">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="users" class="w-4 h-4 text-purple-600"></i><span class="text-xs text-gray-500">Pelanggan</span>
+        </div>
+        <p class="text-2xl font-bold text-purple-800">52,391</p>
+        <p class="text-xs text-green-600">+156 baru</p>
+       </div>
+       <div class="bg-gold-50 rounded-xl p-4 border border-gold-200">
+        <div class="flex items-center gap-2 mb-2">
+         <i data-lucide="user-check" class="w-4 h-4 text-gold-600"></i><span class="text-xs text-gray-500">Staf</span>
+        </div>
+        <p class="text-2xl font-bold text-gold-700">128</p>
+        <p class="text-xs text-gray-500">15 cawangan</p>
+       </div>
+      </div><!-- Mini chart representation -->
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+       <div class="flex items-center justify-between mb-4">
+        <h4 class="font-semibold text-gray-800 text-sm">Prestasi Jualan Bulanan</h4><span class="text-xs text-gray-500">Jan - Jun 2024</span>
+       </div>
+       <div class="flex items-end gap-2 h-32">
+        <div class="flex-1 bg-emerald-200 rounded-t" style="height:45%"></div>
+        <div class="flex-1 bg-emerald-300 rounded-t" style="height:55%"></div>
+        <div class="flex-1 bg-emerald-400 rounded-t" style="height:65%"></div>
+        <div class="flex-1 bg-emerald-500 rounded-t" style="height:50%"></div>
+        <div class="flex-1 bg-emerald-600 rounded-t" style="height:80%"></div>
+        <div class="flex-1 bg-emerald-700 rounded-t" style="height:100%"></div>
+       </div>
+       <div class="flex gap-2 mt-2"><span class="flex-1 text-center text-[10px] text-gray-400">Jan</span> <span class="flex-1 text-center text-[10px] text-gray-400">Feb</span> <span class="flex-1 text-center text-[10px] text-gray-400">Mac</span> <span class="flex-1 text-center text-[10px] text-gray-400">Apr</span> <span class="flex-1 text-center text-[10px] text-gray-400">Mei</span> <span class="flex-1 text-center text-[10px] text-gray-400">Jun</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="bg-emerald-900 text-white py-16">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+     <div>
+      <div class="flex items-center gap-2 mb-4">
+       <div class="w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center">
+        <span class="text-emerald-900 font-bold text-sm">A</span>
+       </div><span class="font-bold">Farmasi Al Qanaah</span>
+      </div>
+      <p class="text-emerald-300 text-sm">Rakan kesihatan dipercayai anda. Perkhidmatan farmasi profesional dan berkualiti.</p>
+     </div>
+     <div>
+      <h5 class="font-semibold mb-4 text-gold-400">Pautan Pantas</h5>
+      <ul class="space-y-2 text-sm text-emerald-300">
+       <li><a href="#" class="hover:text-white transition">Profil Kami</a></li>
+       <li><a href="#" class="hover:text-white transition">Perkhidmatan</a></li>
+       <li><a href="#" class="hover:text-white transition">Produk</a></li>
+       <li><a href="#" class="hover:text-white transition">Kerjaya</a></li>
+      </ul>
+     </div>
+     <div>
+      <h5 class="font-semibold mb-4 text-gold-400">Sokongan</h5>
+      <ul class="space-y-2 text-sm text-emerald-300">
+       <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+       <li><a href="#" class="hover:text-white transition">Hubungi Kami</a></li>
+       <li><a href="#" class="hover:text-white transition">Polisi Privasi</a></li>
+       <li><a href="#" class="hover:text-white transition">Terma &amp; Syarat</a></li>
+      </ul>
+     </div>
+     <div>
+      <h5 class="font-semibold mb-4 text-gold-400">Hubungi</h5>
+      <ul class="space-y-2 text-sm text-emerald-300">
+       <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> 03-1234 5678</li>
+       <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> info@alqanaah.com</li>
+      </ul>
+     </div>
+    </div>
+    <div class="border-t border-emerald-800 pt-8 text-center text-sm text-emerald-400">
+     <p>© 2024 Farmasi Al Qanaah Sdn Bhd. Semua hak cipta terpelihara.</p>
+    </div>
+   </div>
+  </footer>
+  <script src="script.js" defer></script>
+ </body>
+</html>
